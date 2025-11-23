@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.demo.entity.User;
@@ -20,6 +19,11 @@ public class UserService {
     public List<UserResponseDto> listAll(){
         List<User> users = userRepository.findAll();
         return users.stream().map(UserResponseDto::new).toList();
+    }
+
+    public UserResponseDto findUserById(Long id){
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found!"));
+        return new UserResponseDto(user);
     }
 
     public UserResponseDto createUser(UserRequestDto userRequestDto){
