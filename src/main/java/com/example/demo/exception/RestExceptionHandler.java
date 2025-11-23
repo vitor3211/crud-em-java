@@ -1,9 +1,10 @@
 package com.example.demo.exception;
 
 import java.time.LocalDateTime;
-
+import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -22,6 +23,35 @@ public class RestExceptionHandler {
             request.getRequestURI()
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException exception, HttpServletRequest request){
+        ErrorResponse errorResponse = new ErrorResponse(
+            LocalDateTime.now(),
+            exception.getMessage(),
+            exception.getCause(),
+            HttpStatus.NOT_FOUND,
+            request.getRequestURI()
+        );
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Object> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception, HttpServletRequest request){
+        String messages = exception.getBindingResult().getFieldErrors().stream()
+            .map(error -> error.getField() + ": " + error.getDefaultMessage())
+            .collect(Collectors.joining(", "));
+
+            ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now(),
+                messages,
+                exception.getCause(),
+                HttpStatus.NOT_FOUND,
+                request.getRequestURI()
+            );
+
+            return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
 }
