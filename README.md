@@ -138,8 +138,3 @@ Irá aparecer a seguinte imagem:
 4. Pronto! Agora você pode explorar o banco de dados H2 e consultar os usuários cadastrados.
 
 
-
-
-## Licença
-Este projeto foi criado para fins de estudo e pode ser utilizado livremente para qualquer propósito.
-Fique à vontade para usar, modificar e compartilhar 😉
