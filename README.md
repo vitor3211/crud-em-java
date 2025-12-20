@@ -26,19 +26,6 @@ Trata-se de um projeto de estudo, com banco de dados **H2 em memória**, criado 
 - VS code
 - Postman
 
-## Como rodar projeto
-Clone o repositorio
-```bash 
-git clone https://github.com/vitor3211/crud.git
-```
-Entre no projeto
-```bash
-cd crud
-```
-Inicie a aplicação com o comando
-```bash
-mvn spring-boot:run
-```
 ## API Endpoints
 Para testar as requisições HTTP, foi utilizado o Postman.  
 Os endpoints podem ser acessados em `http://localhost:8080/users` ou `http://localhost:8080/users/{id}`.
@@ -122,19 +109,5 @@ Response:
 
 }
 ```
-
-## Acessando banco de dados H2
-Para acessar o banco de dados e ver os usuários cadastrados, precisamos realizar os seguintes passos:
-
-1. Inicie a aplicação com 'mvn spring-boot:run'.
-2. Abra seu navegador e acesse a seguinte URL: 'http://localhost:8080/h2-console'.
-
-Irá aparecer a seguinte imagem:
-
-
-![Logo do projeto](assets/h2.png)
-
-3. Deixe as informações que nem na imagem e clique em 'Connect'.
-4. Pronto! Agora você pode explorar o banco de dados H2 e consultar os usuários cadastrados.
 
 
